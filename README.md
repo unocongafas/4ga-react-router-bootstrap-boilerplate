@@ -257,3 +257,10 @@
     ```css
     @import "~bootstrap/dist/css/bootstrap.min.css";
     ```
+
+27. Instalamos React Router.
+
+    ```bash
+    npm install react-router-dom
+    npm i react-router-dom
+    ```
