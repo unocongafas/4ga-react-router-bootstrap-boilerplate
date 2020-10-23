@@ -15,6 +15,7 @@ import Navbar from "./components/navbar.js"
 import Home from "./pages/home.js"
 import About from "./pages/about.js"
 import Contact from "./pages/contact.js"
+import User from "./pages/user.js"
 
 const container = document.querySelector("#app");
 const component = (
@@ -33,6 +34,10 @@ const component = (
 
                 <Route path="/contact">
                     <Contact />
+                </Route>
+
+                <Route path="/users/:id">
+                    <User />
                 </Route>
             </Switch>
         </div>
