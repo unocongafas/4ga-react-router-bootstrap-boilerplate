@@ -8,6 +8,8 @@ export default function(props) {
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
+                <Link to="/users/1">Usuario 1</Link>
+                <Link to="/users/2">Usuario 2</Link>
             </div>
         </nav>
     )

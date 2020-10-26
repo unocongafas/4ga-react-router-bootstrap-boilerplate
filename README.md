@@ -1,3 +1,10 @@
+# Webpack
+
+Proyecto base para trabajar con webpack
+
+
+## Paso a paso
+
 1. Inicializamos un proyecto. 
 
     ```bash
@@ -162,110 +169,17 @@
     npm i -D webpack-dev-server
     ```
 
-18. Añadimos el comando `develop` a nuestro proyecto en el fichero `package.json` en la sección `scripts`.
+18. Añadimos el comando `start` a nuestro proyecto en el fichero `package.json` en la sección `scripts`.
 
     ```json
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "build": "webpack",
-      "develop": "webpack-dev-server --mode development --port 3000"
+      "start": "webpack-dev-server --mode development --port 3000"
     }
     ```
 
-19. Ejecutamos el comando develop.
-
-    ```bash
-    npm run develop
-    ```
-
-20. Creamos un fichero `.gitignore` para evitar subir ficheros innecesarios al repositorio.
-
-    ```
-    dist
-    node_modules
-    ```
-
-21. Subimos los cambios a nuestro repositorio.
-
-    ```bash
-    git add .
-    git commit -m "Initial commit"
-    git push origin master
-    ```
-
-22. Instalamos babel
-
-    ```bash
-    npm i -D @babel/core @babel/preset-react babel-loader
-    ```
-
-23. Actualizamos la configuración de webpack en el fichero `webpack.config.js`.
-
-    ```js
-    var path = require('path');
-
-    var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-    module.exports = {
-        mode: 'development',
-        entry: './src/main.js',
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: 'main.bundle.js'
-        },
-        module: {
-            rules: [{
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-react']
-                    }
-                }
-            }, {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }]
-        },
-        plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })]
-    };
-    ```
-
-24. Instalamos React.
-
-    ```bash
-    npm install react react-dom
-    npm i react react-dom
-    ```
-
-25. Instalamos Boostrap, jQuery y popper.js.
-
-    ```bash
-    npm install bootstrap jquery popper.js
-    npm i bootstrap jquery popper.js
-    ```
-
-26. Añadimos bootstrap en nuestro fichero main.js
-
-    ```js
-    import "bootstrap";
-    ```
-
-26. Añadimos bootstrap en nuestro fichero style.css
-
-    ```css
-    @import "~bootstrap/dist/css/bootstrap.min.css";
-    ```
-
-27. Instalamos React Router.
-
-    ```bash
-    npm install react-router-dom
-    npm i react-router-dom
-    ```
-
-28. (En caso de utilizar gitpod) Actualizamos la configuración de webpack en el fichero `webpack.config.js`.
+19. Actualizamos la configuración de webpack en el fichero `webpack.config.js`.
 
     ```js
     var path = require('path');
@@ -281,7 +195,67 @@
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'main.bundle.js',
-            sourceMapFilename: "[name].js.map"
+            sourceMapFilename: '[name].js.map'
+        },
+        devtool: "source-map",
+        devServer: {
+            historyApiFallback: true,
+            public: publicUrl
+        },
+        module: {
+            rules: [{
+                test: /\.css$/,
+                use: [ 'style-loader', 'css-loader' ]
+            }]
+        },
+        plugins: [new HtmlWebpackPlugin({template: 'src/index.html'})]
+    };
+    ```
+
+20. Ejecutamos el comando start.
+
+    ```bash
+    npm run start
+    ```
+
+21. Creamos un fichero `.gitignore` para evitar subir ficheros innecesarios al repositorio.
+
+    ```
+    dist
+    node_modules
+    ```
+
+22. Subimos los cambios a nuestro repositorio.
+
+    ```bash
+    git add .
+    git commit -m "Initial commit"
+    git push origin master
+    ```
+
+23. Instalamos babel
+
+    ```bash
+    npm i -D @babel/core @babel/preset-react babel-loader
+    ```
+
+24. Actualizamos la configuración de webpack en el fichero `webpack.config.js`.
+
+    ```js
+    var path = require('path');
+
+    var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+    const [schema, host] = process.env.GITPOD_WORKSPACE_URL.split('://')
+    const publicUrl = `3000-${host}`
+
+    module.exports = {
+        mode: 'development',
+        entry: './src/main.js',
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: 'main.bundle.js',
+            sourceMapFilename: '[name].js.map'
         },
         devtool: "source-map",
         devServer: {
@@ -305,4 +279,37 @@
         },
         plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })]
     };
+    ```
+
+25. Instalamos React.
+
+    ```bash
+    npm install react react-dom
+    npm i react react-dom
+    ```
+
+26. Instalamos Boostrap, jQuery y popper.js.
+
+    ```bash
+    npm install bootstrap jquery popper.js
+    npm i bootstrap jquery popper.js
+    ```
+
+27. Añadimos bootstrap en nuestro fichero main.js
+
+    ```js
+    import "bootstrap";
+    ```
+
+28. Añadimos bootstrap en nuestro fichero style.css
+
+    ```css
+    @import "~bootstrap/dist/css/bootstrap.min.css";
+    ```
+
+29. Instalamos React Router.
+
+    ```bash
+    npm install react-router-dom
+    npm i react-router-dom
     ```
